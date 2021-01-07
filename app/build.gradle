@@ -1,0 +1,84 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.spray.stock"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    applicationVariants.all { variant ->
+        if (variant.buildType.name == "debug") {
+            variant.mergedFlavor.resourceConfigurations.clear()
+            variant.mergedFlavor.resourceConfigurations.add("ko")
+        }
+    }
+
+    buildTypes {
+        def BASE_URL = "BASE_URL"
+        debug {
+            splits.abi.enable = false
+            splits.density.enable = false
+            ext.enableCrashlytics = false
+            buildConfigField "String", "BASE_URL", '"http://localhost:8080/api"'
+            buildConfigField "String", "KAKAO_KEY_HASH", '"Jsk14Kq8VfvZc0lo2IwxAmcgZ9k="'
+            debuggable true
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", '"http://stock-spray.io/api"'
+            buildConfigField "String", "KAKAO_KEY_HASH", '"2sK8sOFeWlkYfnqd9d+0v/sqN28="'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    viewBinding {
+        buildFeatures { viewBinding = true }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:1.3.2"
+    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
+
+    // 네비게이션 바 관련 dependency
+    implementation "com.google.android.material:material:1.2.1"
+    implementation "com.google.android.gms:play-services-ads:19.6.0"
+
+    testImplementation "junit:junit:4.13.1"
+    androidTestImplementation "androidx.test.ext:junit:1.1.2"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
+
+    // Retrofit (Server와의 RESTful API 통신을 위한 dependency)
+    def retrofitVersion = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"           // Retrofit : RESTful API 통신
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"     // Gson
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"             // http logging
+
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    // 카카오
+    implementation "com.kakao.sdk:v2-user:2.2.0" // 카카오 로그인
+}
