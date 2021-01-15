@@ -1,6 +1,6 @@
 package com.spray.stock.api
 
-import com.spray.stock.model.noticeBoard.NoticeBoardResponse
+import com.spray.stock.models.noticeBoard.NoticeBoardResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

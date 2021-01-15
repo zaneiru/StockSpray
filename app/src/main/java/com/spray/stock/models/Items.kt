@@ -1,4 +1,4 @@
-package com.spray.stock.model
+package com.spray.stock.models
 
 data class Items(
     val name: String,

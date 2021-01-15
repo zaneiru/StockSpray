@@ -1,29 +1,26 @@
 package com.spray.stock.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.spray.stock.BuildConfig
 import com.spray.stock.R
 import com.spray.stock.R.layout.fragment_notice
 import com.spray.stock.adapters.NoticeBoardAdapter
-import com.spray.stock.api.NoticeBoardApi
-import com.spray.stock.client.RetrofitClient
 import com.spray.stock.databinding.FragmentNoticeBinding
-import com.spray.stock.model.noticeBoard.NoticeBoard
-import com.spray.stock.model.noticeBoard.NoticeBoardResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.lang.Exception
+import com.spray.stock.models.noticeBoard.NoticeBoard
+import com.spray.stock.models.noticeBoard.NoticeBoardResponse
+import com.spray.stock.viewModels.Status
+import com.spray.stock.viewModels.noticeBoard.NoticeBoardViewModel
 
 class NoticeFragment : Fragment() {
 
@@ -33,6 +30,7 @@ class NoticeFragment : Fragment() {
     private lateinit var mLayoutManager: LinearLayoutManager
     private lateinit var mProgressBar: ProgressBar
     private var mList: MutableList<NoticeBoard> = mutableListOf()
+    private val viewModel: NoticeBoardViewModel by viewModels()
 
     private var mVisibleItemCount: Int = 0
     private var mTotalItemCount: Int = 0
@@ -46,6 +44,7 @@ class NoticeFragment : Fragment() {
         return inflater.inflate(fragment_notice, container, false)
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -69,29 +68,40 @@ class NoticeFragment : Fragment() {
 
     private fun getNoticeBoards(page: Int) {
         mProgressBar.visibility = View.VISIBLE // 공지사항 목록을 가져오기 시작하면 프로그레스바를 Visible (보여줌) 으로 설정
-        val api: NoticeBoardApi = RetrofitClient.get(BuildConfig.BASE_URL)!!.create(NoticeBoardApi::class.java)
-        val call: Call<NoticeBoardResponse> = api.getNoticeBoards(page, mSize)
 
-        // API 를 call 하며 2개의 오버라이드 메서드를 작성한다.
-        call.enqueue(object: Callback<NoticeBoardResponse> {
-            override fun onResponse(call: Call<NoticeBoardResponse>, response: Response<NoticeBoardResponse>) {
-                response.takeIf { it.code() == 200 }?.apply {
-                    mLoading = true
-                    response.body()?.let { setUpAdapter(it) }
-                }
-
-                mProgressBar.visibility = View.GONE
-            }
-
-            override fun onFailure(call: Call<NoticeBoardResponse>, t: Throwable) {
-                try {
+        viewModel.loadData().observe(this, Observer { networkResource ->
+            when (networkResource.status) {
+                Status.SUCCESS -> {
+                    val noticeBoards = networkResource.data
+                    noticeBoards?.let { setUpAdapter(it) }
                     mProgressBar.visibility = View.GONE
-                    t.message?.let { Log.d("tag", it) }
-                } catch (e: Exception) {
-
+                }
+                Status.ERROR -> {
+                    mProgressBar.visibility = View.GONE
                 }
             }
         })
+
+        // API 를 call 하며 2개의 오버라이드 메서드를 작성한다.
+//        call.enqueue(object: Callback<NoticeBoardResponse> {
+//            override fun onResponse(call: Call<NoticeBoardResponse>, response: Response<NoticeBoardResponse>) {
+//                response.takeIf { it.code() == 200 }?.apply {
+//                    mLoading = true
+//                    response.body()?.let { setUpAdapter(it) }
+//                }
+//
+//                mProgressBar.visibility = View.GONE
+//            }
+//
+//            override fun onFailure(call: Call<NoticeBoardResponse>, t: Throwable) {
+//                try {
+//                    mProgressBar.visibility = View.GONE
+//                    t.message?.let { Log.d("tag", it) }
+//                } catch (e: Exception) {
+//
+//                }
+//            }
+//        })
     }
 
     private fun setUpAdapter(body: NoticeBoardResponse) {

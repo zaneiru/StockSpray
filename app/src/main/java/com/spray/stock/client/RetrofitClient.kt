@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 
 class RetrofitClient {
     companion object {
-        var retrofit: Retrofit? = null
+        private var retrofit: Retrofit? = null
 
         fun get(baseUrl: String): Retrofit? {
             if (retrofit == null) {

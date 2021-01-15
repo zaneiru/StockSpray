@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.spray.stock.ItemActivity
+import com.spray.stock.views.ItemActivity
 import com.spray.stock.adapters.ItemAdapter
-import com.spray.stock.model.Items
+import com.spray.stock.models.Items
 import com.spray.stock.R
 
 class MainFragment : Fragment() {

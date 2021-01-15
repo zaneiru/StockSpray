@@ -1,14 +1,13 @@
-package com.spray.stock
+package com.spray.stock.views
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
+import com.spray.stock.BuildConfig
 import com.spray.stock.api.ItemInfoApi
 import com.spray.stock.client.RetrofitClient
 import com.spray.stock.databinding.ActivityItemBinding
-import com.spray.stock.model.noticeBoard.NoticeBoardResponse
-import retrofit2.Call
 
 class ItemActivity : AppCompatActivity() {
 
@@ -38,7 +37,7 @@ class ItemActivity : AppCompatActivity() {
     private fun updateView(id: Long) {
         // 레트로핏으로 정보 가져온다.
         val api: ItemInfoApi = RetrofitClient.get(BuildConfig.BASE_URL)!!.create(ItemInfoApi::class.java)
-        val call: Call<NoticeBoardResponse> = api.getNoticeBoards(page, mSize)
+        //val call: Call<NoticeBoardResponse> = api.getNoticeBoards(page, mSize)
 
     }
 }

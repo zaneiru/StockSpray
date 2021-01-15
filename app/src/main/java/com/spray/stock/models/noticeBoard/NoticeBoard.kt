@@ -1,4 +1,4 @@
-package com.spray.stock.model.noticeBoard
+package com.spray.stock.models.noticeBoard
 
 import java.io.Serializable
 import java.time.LocalDateTime

@@ -1,11 +1,10 @@
-package com.spray.stock
+package com.spray.stock.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.renderscript.ScriptGroup
 import androidx.fragment.app.Fragment
 import com.google.android.gms.ads.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.spray.stock.R
 import com.spray.stock.databinding.ActivityMainBinding
 import com.spray.stock.fragments.LatestFragment
 import com.spray.stock.fragments.MainFragment

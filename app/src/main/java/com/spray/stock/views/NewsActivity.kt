@@ -1,4 +1,4 @@
-package com.spray.stock
+package com.spray.stock.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

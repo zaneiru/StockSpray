@@ -9,6 +9,6 @@ class KakaoApplication: Application() {
         super.onCreate()
 
         // 카카오 로그인을 위한 초기화
-        KakaoSdk.init(this, BuildConfig.KAKAO_KEY_HASH)
+        KakaoSdk.init(this, BuildConfig.KAKAO_NATIVE_APP_KEY)
     }
 }

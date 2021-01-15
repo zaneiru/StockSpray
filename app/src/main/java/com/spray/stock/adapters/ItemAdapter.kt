@@ -12,9 +12,9 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
-import com.spray.stock.ItemActivity
+import com.spray.stock.views.ItemActivity
 import com.spray.stock.R
-import com.spray.stock.model.Items
+import com.spray.stock.models.Items
 
 class ItemAdapter(
     private val context: Context?,

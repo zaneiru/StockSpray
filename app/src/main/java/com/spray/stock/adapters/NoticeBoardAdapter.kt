@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.spray.stock.R
-import com.spray.stock.model.noticeBoard.NoticeBoardResponse
+import com.spray.stock.models.noticeBoard.NoticeBoardResponse
 
 class NoticeBoardAdapter(private var response: NoticeBoardResponse) : RecyclerView.Adapter<NoticeBoardAdapter.Companion.Holder>() {
     private lateinit var context: Context
