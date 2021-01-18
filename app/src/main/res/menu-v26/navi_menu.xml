@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menuMain"
+        android:enabled="true"
+        android:title="@string/navi_main"
+        android:icon="@drawable/ic_main"
+        />
+
+    <item android:id="@+id/menuPost"
+        android:title="@string/navigation_item_realtime_news"
+        android:icon="@drawable/ic_round_realtime" />
+
+    <item android:id="@+id/menuLatest"
+        android:title="@string/navigation_item_theme"
+        android:icon="@drawable/ic_round_solid_theme"
+        />
+
+    <item android:id="@+id/menuReport"
+        android:title="@string/navigation_item_report"
+        android:icon="@drawable/ic_round_solid_report" />
+
+    <item android:id="@+id/menuNotice"
+        android:title="@string/navi_notice"
+        android:icon="@drawable/ic_notice" />
+</menu>

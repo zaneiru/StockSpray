@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/amaranth</item>
+        <item>@font/exo_2</item>
+        <item>@font/exo_2_thin</item>
+        <item>@font/noto_sans</item>
+        <item>@font/noto_sans_bold</item>
+    </array>
+</resources>

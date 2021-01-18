@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">빨간맛주식</string>
+    <string name="spray_com_reserved">＠spray.com reserved.</string>
+    <string name="intro_logo">Intro Logo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="navi_main">오늘의 추천</string>
+    <string name="navigation_item_realtime_news">실시간 뉴스</string>
+    <string name="navi_post">지난 추천</string>
+    <string name="navigation_item_theme">테마</string>
+    <string name="navigation_item_report">증권사레포트</string>
+    <string name="navi_notice">공지사항</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pt_notice_board">공지사항</string>
+    <string name="desc_logo_image">로고이미지</string>
+    <string name="intro_logo_app_name">빨간맛 주식</string>
+</resources>
