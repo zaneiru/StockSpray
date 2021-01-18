@@ -1,35 +1,46 @@
 package com.spray.stock.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.spray.stock.R
-import com.spray.stock.models.noticeBoard.NoticeBoardResponse
+import com.spray.stock.models.noticeBoard.NoticeBoard
 
-class NoticeBoardAdapter(private var response: NoticeBoardResponse) : RecyclerView.Adapter<NoticeBoardAdapter.Companion.Holder>() {
-    private lateinit var context: Context
-    private lateinit var rv: View
+class NoticeBoardAdapter : RecyclerView.Adapter<NoticeBoardAdapter.CustomViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        context = parent.context
-        rv = LayoutInflater.from(parent.context).inflate(R.layout.fragment_notice, parent, false)
-        return Holder(rv)
+    private lateinit var mView: View
+    private var mNoticeBoards = ArrayList<NoticeBoard>()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+        mView = LayoutInflater.from(parent.context).inflate(R.layout.notice_boards, parent, false)
+        return CustomViewHolder(mView)
     }
 
-    override fun getItemCount(): Int = response.totalElements
+    override fun getItemCount(): Int = mNoticeBoards.size
 
-    override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.tvDate.text = response.content[position].lastModifiedDate.toString()
-        holder.tvTitle.text = response.content[position].title
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+        holder.bind(mNoticeBoards[position])
     }
 
-    companion object {
-        class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-            var tvDate: TextView = itemView!!.findViewById(R.id.tv_notice_board_date)
-            var tvTitle: TextView = itemView!!.findViewById(R.id.tv_notice_board_title)
+    fun addList(noticeBoards: ArrayList<NoticeBoard>){
+        mNoticeBoards.addAll(noticeBoards)
+        notifyDataSetChanged()
+    }
+
+    fun clear(){
+        mNoticeBoards.clear()
+        notifyDataSetChanged()
+    }
+
+    inner class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val tvDate: TextView = itemView.findViewById(R.id.tv_notice_board_date)
+        private val tvTitle: TextView = itemView.findViewById(R.id.tv_notice_board_title)
+
+        fun bind(noticeBoard: NoticeBoard){
+            tvDate.text = noticeBoard.lastModifiedDate
+            tvTitle.text = noticeBoard.title
         }
     }
 }

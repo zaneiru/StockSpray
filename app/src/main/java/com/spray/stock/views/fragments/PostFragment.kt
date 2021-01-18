@@ -1,4 +1,4 @@
-package com.spray.stock.fragments
+package com.spray.stock.views.fragments
 
 import android.content.Intent
 import android.os.Bundle

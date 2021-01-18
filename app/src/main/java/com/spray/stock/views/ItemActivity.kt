@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.annotation.RequiresApi
 import com.spray.stock.BuildConfig
 import com.spray.stock.api.ItemInfoApi
-import com.spray.stock.client.RetrofitClient
+import com.spray.stock.config.RetrofitClient
 import com.spray.stock.databinding.ActivityItemBinding
 
 class ItemActivity : AppCompatActivity() {
