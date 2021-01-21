@@ -1,15 +1,15 @@
 package com.spray.stock.api
 
 import com.spray.stock.models.ApiPageResponse
-import com.spray.stock.models.noticeBoard.NoticeBoard
+import com.spray.stock.models.item.RecommendedItem
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface NoticeBoardApi {
-    @GET("api/v1/noticeBoards")
-    suspend fun getNoticeBoards(
+interface RecommendedItemApi {
+    @GET("api/v1/recommendedItems")
+    suspend fun getRecommendedItems(
         @Query("page") page: Int,
         @Query("size") size: Int
-    ): Response<ApiPageResponse<NoticeBoard>>
+    ): Response<ApiPageResponse<RecommendedItem>>
 }

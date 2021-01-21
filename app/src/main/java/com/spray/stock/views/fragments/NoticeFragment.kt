@@ -3,13 +3,11 @@ package com.spray.stock.views.fragments
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -37,7 +35,7 @@ class NoticeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private var mPage = 0
     private var mTotalPage = 0
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         mBinding = FragmentNoticeBinding.inflate(inflater, container, false)
         mRecyclerView = mBinding.rvNoticeBoard
         mSwipeRefreshLayout = mBinding.spNoticeBoard
@@ -77,6 +75,7 @@ class NoticeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 val total  = mAdapter.itemCount
                 if (!mLoading && mPage < mTotalPage){
                     if (visibleItemCount + pastVisibleItem >= total){
+                        Log.d("여기 들어오면 안되는뎅", "여기 들어오면 안되는뎅")
                         mPage++
                         getNoticeBoards(false)
                     }

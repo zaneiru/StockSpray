@@ -4,5 +4,5 @@ import com.spray.stock.models.product.Product
 
 data class Member(
     val id: Long,
-    val product: Product
+    val uuid: String
 )

@@ -11,8 +11,8 @@ import com.spray.stock.views.fragments.*
 
 class MainActivity : AppCompatActivity() {
     private val mainFragment by lazy { MainFragment() }
-    private val postFragment by lazy { PostFragment() }
-    private val latestFragment by lazy { LatestFragment() }
+    private val newsFragment by lazy { NewsFragment() }
+    private val themeFragment by lazy { ThemeFragment() }
     private val reportFragment by lazy { ReportFragment() }
     private val noticeFragment by lazy { NoticeFragment() }
 
@@ -64,13 +64,13 @@ class MainActivity : AppCompatActivity() {
                         loadBannerAd(binding)
                         changeFragment(mainFragment)
                     }
-                    R.id.menuPost -> {
+                    R.id.menuNews -> {
                         loadBannerAd(binding)
-                        changeFragment(postFragment)
+                        changeFragment(newsFragment)
                     }
-                    R.id.menuLatest -> {
+                    R.id.menuTheme -> {
                         loadBannerAd(binding)
-                        changeFragment(latestFragment)
+                        changeFragment(themeFragment)
                     }
                     R.id.menuReport -> {
                         loadBannerAd(binding)

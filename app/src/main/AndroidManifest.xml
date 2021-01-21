@@ -13,16 +13,10 @@
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.StockSpray">
+        <activity android:name=".views.item.RecommendedItemDetailActivity"></activity>
         <activity
             android:name=".views.TestActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".views.LogoActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
@@ -44,7 +38,11 @@
         <activity
             android:name=".views.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>

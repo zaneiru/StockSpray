@@ -36,7 +36,7 @@ class ItemActivity : AppCompatActivity() {
 
     private fun updateView(id: Long) {
         // 레트로핏으로 정보 가져온다.
-        val api: ItemInfoApi = RetrofitClient.get(BuildConfig.BASE_URL)!!.create(ItemInfoApi::class.java)
+        val api: ItemInfoApi = RetrofitClient.get(BuildConfig.ITEM_BASE_URL)!!.create(ItemInfoApi::class.java)
         //val call: Call<NoticeBoardResponse> = api.getNoticeBoards(page, mSize)
 
     }
