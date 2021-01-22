@@ -1,5 +1,6 @@
 package com.spray.stock.viewModels.items
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.spray.stock.BuildConfig
@@ -8,7 +9,7 @@ import com.spray.stock.config.RetrofitClient
 import com.spray.stock.viewModels.Resource
 import kotlinx.coroutines.Dispatchers
 
-class RecommendedItemViewModel: ViewModel() {
+class RecommendedItemViewModel @ViewModelInject constructor(): ViewModel() {
 
     fun loadData(page: Int) = liveData(Dispatchers.IO) {
         emit(Resource.loading())

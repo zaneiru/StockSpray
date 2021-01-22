@@ -22,7 +22,7 @@ import com.spray.stock.viewModels.noticeBoard.NoticeBoardViewModel
 
 class NoticeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
-    private lateinit var mBinding: FragmentNoticeBinding
+    private var mBinding: FragmentNoticeBinding? = null
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: NoticeBoardAdapter
     private lateinit var mLayoutManager: LinearLayoutManager
@@ -37,16 +37,16 @@ class NoticeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         mBinding = FragmentNoticeBinding.inflate(inflater, container, false)
-        mRecyclerView = mBinding.rvNoticeBoard
-        mSwipeRefreshLayout = mBinding.spNoticeBoard
-        return mBinding.root
+        mRecyclerView = mBinding?.rvNoticeBoard!!
+        mSwipeRefreshLayout = mBinding?.spNoticeBoard!!
+        return mBinding?.root!!
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mProgressBar = mBinding.pbNoticeBoard
+        mProgressBar = mBinding?.pbNoticeBoard!!
         mLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mSwipeRefreshLayout.setOnRefreshListener(this)
         mAdapter = NoticeBoardAdapter()
@@ -102,12 +102,12 @@ class NoticeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
                     mProgressBar.visibility = View.GONE
                     mLoading = false
-                    mBinding.spNoticeBoard.isRefreshing = false
+                    mBinding?.spNoticeBoard?.isRefreshing = false
                 }
                 Status.ERROR -> {
                     mProgressBar.visibility = View.GONE
                     mLoading = false
-                    mBinding.spNoticeBoard.isRefreshing = false
+                    mBinding?.spNoticeBoard?.isRefreshing = false
                 }
             }
         })
@@ -117,5 +117,10 @@ class NoticeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         mAdapter.clear()
         mPage = 0
         getNoticeBoards(true)
+    }
+
+    override fun onDestroyView() {
+        mBinding = null
+        super.onDestroyView()
     }
 }

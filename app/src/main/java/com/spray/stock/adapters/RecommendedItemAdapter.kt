@@ -13,8 +13,11 @@ import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.spray.stock.R
 import com.spray.stock.models.item.RecommendedItem
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RecommendedItemAdapter(val context: Context) : RecyclerView.Adapter<RecommendedItemAdapter.CustomViewHolder>() {
+@Singleton
+class RecommendedItemAdapter @Inject constructor(val context: Context): RecyclerView.Adapter<RecommendedItemAdapter.CustomViewHolder>() {
 
     private lateinit var mView: View
     private var mRecommendedItems = ArrayList<RecommendedItem>()
@@ -61,7 +64,7 @@ class RecommendedItemAdapter(val context: Context) : RecyclerView.Adapter<Recomm
             Glide.with(context)
                 .load(recommendedItem.bannerUrl)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .transform(CenterInside(), RoundedCorners(6))
+                .transform(CenterInside(), RoundedCorners(12))
                 .into(bannerUrl)
         }
     }

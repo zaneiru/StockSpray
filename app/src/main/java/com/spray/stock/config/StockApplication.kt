@@ -3,8 +3,10 @@ package com.spray.stock.config
 import android.app.Application
 import com.kakao.sdk.common.KakaoSdk
 import com.spray.stock.BuildConfig
+import dagger.hilt.android.HiltAndroidApp
 
-class KakaoApplication: Application() {
+@HiltAndroidApp
+class StockApplication: Application() {
     override fun onCreate() {
         super.onCreate()
 

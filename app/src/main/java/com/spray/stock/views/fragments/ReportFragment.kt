@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import com.spray.stock.R
 
 class ReportFragment : Fragment() {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         return inflater.inflate(R.layout.fragment_report, container, false)
     }
 }

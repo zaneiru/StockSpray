@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -28,24 +30,27 @@ android {
     }
 
     buildTypes {
-        def BASE_URL = "BASE_URL"
+        def NOTICE_BASE_URL = "NOTICE_BASE_URL"
+        def KAKAO_KEY_HASH = "KAKAO_KEY_HASH"
+        def ITEM_BASE_URL = "ITEM_BASE_URL"
+        def KAKAO_NATIVE_APP_KEY = "KAKAO_NATIVE_APP_KEY"
         debug {
             splits.abi.enable = false
             splits.density.enable = false
             ext.enableCrashlytics = false
-            buildConfigField "String", "NOTICE_BASE_URL", '"http://192.168.35.77:8089/"'
-            buildConfigField "String", "ITEM_BASE_URL", '"http://172.26.109.145:8091/"'
-            buildConfigField "String", "KAKAO_KEY_HASH", '"Jsk14Kq8VfvZc0lo2IwxAmcgZ9k="'
-            buildConfigField "String", "KAKAO_NATIVE_APP_KEY", '"4f490ba98d78bbadcca3860f890c159f"'
+            buildConfigField "String", NOTICE_BASE_URL, '"http://192.168.35.77:8089/"'
+            buildConfigField "String", ITEM_BASE_URL, '"http://192.168.35.95:8091/"'
+            buildConfigField "String", KAKAO_KEY_HASH, '"Jsk14Kq8VfvZc0lo2IwxAmcgZ9k="'
+            buildConfigField "String", KAKAO_NATIVE_APP_KEY, '"4f490ba98d78bbadcca3860f890c159f"'
             debuggable true
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "NOTICE_BASE_URL", '"http://grape.io/"'
-            buildConfigField "String", "ITEM_BASE_URL", '"http://grape.io/"'
-            buildConfigField "String", "KAKAO_KEY_HASH", '"2sK8sOFeWlkYfnqd9d+0v/sqN28="'
-            buildConfigField "String", "KAKAO_NATIVE_APP_KEY", '"4f490ba98d78bbadcca3860f890c159f"'
+            buildConfigField "String", NOTICE_BASE_URL, '"http://grape.io/"'
+            buildConfigField "String", ITEM_BASE_URL, '"http://grape.io/"'
+            buildConfigField "String", KAKAO_KEY_HASH, '"2sK8sOFeWlkYfnqd9d+0v/sqN28="'
+            buildConfigField "String", KAKAO_NATIVE_APP_KEY, '"4f490ba98d78bbadcca3860f890c159f"'
         }
     }
     compileOptions {
@@ -70,7 +75,7 @@ dependencies {
     // 네비게이션 바 관련 dependency
     implementation "com.google.android.material:material:1.2.1"
     implementation "com.google.gms:google-services:4.3.4"
-    implementation "com.google.android.gms:play-services-ads:19.6.0"
+    implementation "com.google.android.gms:play-services-ads:19.7.0"
     implementation "com.google.android.gms:play-services-base:17.5.0"
     implementation 'com.google.android.gms:play-services-basement:17.5.0'
 
@@ -105,24 +110,38 @@ dependencies {
     implementation "com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2"
 
     // 코루틴
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
+    def coroutineVersion = "1.4.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
 
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
     implementation "androidx.activity:activity-ktx:1.1.0"
 
     // 뷰 모델
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+    def lifeCycleVersion = "2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifeCycleVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifeCycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifeCycleVersion"
     //noinspection LifecycleAnnotationProcessorWithJava8
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.2.0"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifeCycleVersion"
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    implementation 'com.github.bumptech.glide:annotations:4.11.0'
-    implementation "com.github.bumptech.glide:okhttp3-integration:4.11.0"
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    def glideVersion = "4.11.0"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation "com.github.bumptech.glide:annotations:$glideVersion"
+    implementation "com.github.bumptech.glide:okhttp3-integration:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+    def nav_version = "2.3.2"
+    // Kotlin
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // Dagger hilt
+    implementation "com.google.dagger:hilt-android:2.28-alpha"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02"
+    kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
+    kapt "androidx.hilt:hilt-compiler:1.0.0-alpha02"
 
 }
