@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.spray.stock.views.fragments.MainFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.spray.stock.views.fragments.NewsFragment"
+        android:label="fragment_friends"
+        tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/themeFragment"
+        android:name="com.spray.stock.views.fragments.ThemeFragment"
+        android:label="fragment_music"
+        tools:layout="@layout/fragment_theme" />
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.spray.stock.views.fragments.ReportFragment"
+        android:label="fragment_music"
+        tools:layout="@layout/fragment_report" />
+    <fragment
+        android:id="@+id/noticeFragment"
+        android:name="com.spray.stock.views.fragments.NoticeFragment"
+        android:label="fragment_music"
+        tools:layout="@layout/fragment_notice" />
+</navigation>
