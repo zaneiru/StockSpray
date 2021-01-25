@@ -16,4 +16,10 @@
         <item name="itemIconTint">@color/intro_background</item>
     </style>
 
+    <style name="DialogFullShow">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+
 </resources>

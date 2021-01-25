@@ -27,7 +27,7 @@
             android:layout_gravity="end|bottom"
             android:layout_marginEnd="14dp"
             android:layout_marginRight="14dp"
-            android:layout_marginBottom="192dp"
+            android:layout_marginBottom="180dp"
             android:src="@drawable/ic_fiiled_round_favorite"
             android:visibility="invisible"
             app:backgroundTint="@color/white"
@@ -45,7 +45,7 @@
             android:layout_gravity="end|bottom"
             android:layout_marginEnd="14dp"
             android:layout_marginRight="14dp"
-            android:layout_marginBottom="132dp"
+            android:layout_marginBottom="124dp"
             android:src="@drawable/ic_floating_filled_solid_membership"
             android:visibility="invisible"
             app:backgroundTint="@color/white"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_marginRight="14dp"
-            android:layout_marginBottom="68dp"
+            android:layout_marginBottom="64dp"
             android:src="@drawable/ic_person_add"
             app:backgroundTint="#F23748"
             app:elevation="6dp"
@@ -89,15 +89,15 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="@drawable/bar_shadow_up"/>
+                android:layout_height="0.5dp"
+                android:background="#F2F4F4F4"/>
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/my_bottom_nav"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="#ffffff"
-                android:fontFamily="@font/nanum_barun_gothic"
+                android:layout_height="52dp"
+                android:background="#F9F9F9"
+                android:backgroundTint="#F9F9F9"
                 android:foregroundTint="#ffffff"
                 app:itemIconTint="@drawable/bottom_navi_icon_selector"
                 app:itemTextColor="@drawable/bottom_navi_icon_selector"

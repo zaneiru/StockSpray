@@ -9,5 +9,6 @@ data class RecommendedItem (
     val likeCount: Int,
     val viewCount: Int,
     val commentCount: Int,
-    val lastModifiedDate: String
+    val lastModifiedDate: String,
+    val comments: ArrayList<RecommendedItemComment>?
 )

@@ -8,13 +8,6 @@
     tools:context="com.spray.stock.views.fragments.MainFragment"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-
-    </RelativeLayout>
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -31,12 +24,11 @@
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintStart_toStartOf="parent"
         ads:layout_constraintTop_toTopOf="parent">
-
     </TextView>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_height="8dp"
         android:background="@drawable/bar_shadow_down"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -63,7 +55,7 @@
         <ScrollView
             android:id="@+id/svRecommendedItem"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"

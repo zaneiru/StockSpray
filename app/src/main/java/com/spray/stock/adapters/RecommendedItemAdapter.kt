@@ -6,44 +6,57 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.spray.stock.R
+import com.spray.stock.config.GlideApp
 import com.spray.stock.models.item.RecommendedItem
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class RecommendedItemAdapter @Inject constructor(val context: Context): RecyclerView.Adapter<RecommendedItemAdapter.CustomViewHolder>() {
+class RecommendedItemAdapter @Inject constructor(val context: Context) : RecyclerView.Adapter<RecommendedItemAdapter.ViewHolder>() {
 
     private lateinit var mView: View
-    private var mRecommendedItems = ArrayList<RecommendedItem>()
+    private var mRecommendedItems = mutableListOf<RecommendedItem>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+    private val diffCallback = object : DiffUtil.ItemCallback<RecommendedItem>() {
+        override fun areItemsTheSame(oldItem: RecommendedItem, newItem: RecommendedItem) =
+            oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: RecommendedItem, newItem: RecommendedItem) =
+            oldItem == newItem
+    }
+
+    private val mAsyncDiff = AsyncListDiffer(this, diffCallback)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         mView = LayoutInflater.from(parent.context).inflate(R.layout.items_main, parent, false)
-        return CustomViewHolder(mView)
+        return ViewHolder(mView)
     }
 
-    override fun getItemCount(): Int = mRecommendedItems.size
+    override fun getItemCount(): Int = mAsyncDiff.currentList.size
 
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.bind(mRecommendedItems[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(mAsyncDiff.currentList[position])
     }
 
-    fun addList(recommendedItems: ArrayList<RecommendedItem>){
-        mRecommendedItems.addAll(recommendedItems)
-        notifyDataSetChanged()
+    fun submitList(recommendedItems: MutableList<RecommendedItem>?) {
+        mAsyncDiff.submitList(recommendedItems)
+        mRecommendedItems.addAll(recommendedItems!!)
     }
 
-    fun clear(){
+    fun clear() {
         mRecommendedItems.clear()
-        notifyDataSetChanged()
+        mAsyncDiff.submitList(mRecommendedItems)
     }
 
-    inner class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         private val lastModifiedDate: TextView = itemView.findViewById(R.id.tv_recommended_last_modified_date)
         private val bannerMainTitle: TextView = itemView.findViewById(R.id.tv_recommended_banner_main_title)
         private val bannerSubTitle: TextView = itemView.findViewById(R.id.tv_recommended_banner_sub_title)
@@ -53,7 +66,7 @@ class RecommendedItemAdapter @Inject constructor(val context: Context): Recycler
         private val commentCount: TextView = itemView.findViewById(R.id.tv_recommended_comment_count)
         private val bannerUrl: ImageView = itemView.findViewById(R.id.iv_recommended_banner_url)
 
-        fun bind(recommendedItem: RecommendedItem){
+        fun bind(recommendedItem: RecommendedItem) {
             lastModifiedDate.text = recommendedItem.lastModifiedDate
             bannerMainTitle.text = recommendedItem.bannerMainTitle
             bannerSubTitle.text = recommendedItem.bannerSubTitle
@@ -61,7 +74,7 @@ class RecommendedItemAdapter @Inject constructor(val context: Context): Recycler
             likeCount.text = recommendedItem.likeCount.toString()
             viewCount.text = recommendedItem.viewCount.toString()
             commentCount.text = recommendedItem.viewCount.toString()
-            Glide.with(context)
+            GlideApp.with(context)
                 .load(recommendedItem.bannerUrl)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .transform(CenterInside(), RoundedCorners(12))

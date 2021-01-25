@@ -4,12 +4,19 @@ import com.spray.stock.models.ApiPageResponse
 import com.spray.stock.models.item.RecommendedItem
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RecommendedItemApi {
+
     @GET("api/v1/recommendedItems")
     suspend fun getRecommendedItems(
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Response<ApiPageResponse<RecommendedItem>>
+
+    @GET("api/v1/recommendedItems/{id}")
+    suspend fun getRecommendedItem(
+        @Path("id") id: Long
+    ): Response<RecommendedItem>
 }

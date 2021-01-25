@@ -1,0 +1,1 @@
+package com.spray.stock.dialogsinterface CommentDialog {    fun onCommentWriteClicked()}

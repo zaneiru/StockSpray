@@ -20,10 +20,6 @@ import java.io.InputStream
 @GlideModule
 class GlideConfig : AppGlideModule() {
 
-    override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
-        super.registerComponents(context, glide, registry)
-    }
-
     override fun applyOptions(context: Context, builder: GlideBuilder) {
         // 메모리 캐시
         val calculator = MemorySizeCalculator.Builder(context).setMemoryCacheScreens(2f).build()

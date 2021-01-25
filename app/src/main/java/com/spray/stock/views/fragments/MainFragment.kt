@@ -13,15 +13,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
 import com.spray.stock.R
 import com.spray.stock.adapters.RecommendedItemAdapter
 import com.spray.stock.databinding.FragmentMainBinding
 import com.spray.stock.viewModels.Status
 import com.spray.stock.viewModels.items.RecommendedItemViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
@@ -49,6 +46,7 @@ class MainFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         mBinding = FragmentMainBinding.inflate(inflater, container, false)
         mRecyclerView = mBinding?.rvRecommendedItem!!
         mSwipeRefreshLayout = mBinding?.spRecommendedItem!!
+        mBinding?.svRecommendedItem?.isNestedScrollingEnabled = false
         return mBinding?.root!!
     }
 
@@ -57,23 +55,19 @@ class MainFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         super.onViewCreated(view, savedInstanceState)
 
         mProgressBar = mBinding?.pbRecommendedItem!!
-        mLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mSwipeRefreshLayout.setOnRefreshListener(this)
         mAdapter = context?.let { RecommendedItemAdapter(it) }!!
         with(mRecyclerView) {
-            setHasFixedSize(true)
+            setHasFixedSize(false)
             layoutManager = mLayoutManager
             adapter = mAdapter
         }
 
         // 목록에서 각 Content 영역 하단에 구분되는 gray bottom bar 그리는 부분
-        val dividerItemDecoration =
-            DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
+        val dividerItemDecoration = DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
         dividerItemDecoration.setDrawable(this.context?.let {
-            AppCompatResources.getDrawable(
-                it,
-                R.drawable.recyclerview_divider_line
-            )
+            AppCompatResources.getDrawable(it, R.drawable.recyclerview_divider_line)
         }!!)
         mRecyclerView.addItemDecoration(dividerItemDecoration)
 
@@ -84,8 +78,9 @@ class MainFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 val visibleItemCount = mLayoutManager.childCount
                 val pastVisibleItem = mLayoutManager.findFirstVisibleItemPosition()
                 val total = mAdapter.itemCount
+
                 if (!mLoading && mPage < mTotalPage) {
-                    if (visibleItemCount + pastVisibleItem >= total) {
+                    if (visibleItemCount + pastVisibleItem >= total && total >= 20) {
                         mPage++
                         getRecommendedItems(false)
                     }
@@ -99,7 +94,7 @@ class MainFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         mLoading = true
         if (!isRefresh) mProgressBar.visibility = View.VISIBLE
 
-        mViewModel.loadData(mPage).observe(viewLifecycleOwner, { networkResource ->
+        mViewModel.loadRecommendedItems(mPage).observe(viewLifecycleOwner, { networkResource ->
             when (networkResource.status) {
                 Status.LOADING -> {
                 }
@@ -107,13 +102,12 @@ class MainFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                     mTotalPage = networkResource.data?.body()?.totalElements!!
 
                     val listResponse = networkResource.data.body()?.content
-                    if (listResponse != null) {
-                        mAdapter.addList(listResponse)
-                    }
 
+                    mAdapter.submitList(listResponse?.toMutableList())
                     mProgressBar.visibility = View.GONE
                     mLoading = false
                     mBinding?.spRecommendedItem?.isRefreshing = false
+
                 }
                 Status.ERROR -> {
                     mProgressBar.visibility = View.GONE

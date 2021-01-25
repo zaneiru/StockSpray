@@ -14,5 +14,6 @@
     <string name="pt_notice_board">공지사항</string>
     <string name="desc_logo_image">로고이미지</string>
     <string name="intro_logo_app_name">빨간맛 주식</string>
-    <string name="recommended_item">추천 테마</string>
+    <string name="recommended_item">테마 추천</string>
+    <string name="comment_pre_text">공개 댓글을 남겨 주세요.</string>
 </resources>
