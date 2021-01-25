@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- start of 코멘트 유저 프로필 사진 -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_recommended_item_comment_member_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_filled_profile_back_square" />
+        <!-- end of 코멘트 유저 프로필 사진 -->
+
+        <!-- start of 코멘트 영역 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:orientation="vertical">
+
+            <!-- start of 코멘트 작성자 닉네임 -->
+            <TextView
+                android:id="@+id/tv_recommended_item_comment_member_nick_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="킹왕짱임"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+            <!-- end of 코멘트 작성자 닉네임 -->
+
+            <!-- start of 코멘트 작성일 -->
+            <TextView
+                android:id="@+id/tv_recommended_item_comment_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="9개월전"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_recommended_item_comment_member_nick_name"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!-- end of 코멘트 작성일 -->
+
+            <!-- start of 코멘트 -->
+            <TextView
+                android:id="@+id/tv_recommended_item_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/noto_sans"
+                android:letterSpacing="-0.04"
+                android:text="여러분 현실 프로그래머는 90%는 모니터 노려보기 10%가 코드 입력하기 합니다.\n타닥타닥대는건 카톡으로 노닥거리고 있는거구요"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recommended_item_comment_member_nick_name" />
+            <!-- end of 코멘트 -->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- end of 코멘트 영역 -->
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
