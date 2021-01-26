@@ -9,11 +9,11 @@ fun String.diffTime(): String {
     val now = LocalDateTime.now()
 
     return when (val diff = LocalDateTime.from(to).until(now, ChronoUnit.MINUTES)) {
-        in 0..59 -> diff.toString().toInt().toString().plus("분전")
-        in 60..1439 -> (diff / 60).toInt().toString().plus("시간전")
-        in 1440..43199 -> (diff / 60 / 24).toInt().toString().plus("일전")
-        in 43200..525599 -> (diff / 60 / 24 / 30).toInt().toString().plus("개월전")
-        else -> (diff / 60 / 24 / 30 / 12).toInt().toString().plus("년전")
+        in 0..59 -> diff.toString().toInt().toString().plus("분 전")
+        in 60..1439 -> (diff / 60).toInt().toString().plus("시간 전")
+        in 1440..43199 -> (diff / 60 / 24).toInt().toString().plus("일 전")
+        in 43200..525599 -> (diff / 60 / 24 / 30).toInt().toString().plus("개월 전")
+        else -> (diff / 60 / 24 / 30 / 12).toInt().toString().plus("년 전")
     }
 }
 

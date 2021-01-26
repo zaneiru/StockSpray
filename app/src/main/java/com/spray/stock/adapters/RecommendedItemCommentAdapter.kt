@@ -1,13 +1,11 @@
 package com.spray.stock.adapters
 
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +15,6 @@ import com.spray.stock.R
 import com.spray.stock.config.GlideApp
 import com.spray.stock.models.item.RecommendedItemComment
 import com.spray.stock.utils.diffTime
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.temporal.ChronoUnit
 
 class RecommendedItemCommentAdapter(val context: Context) : RecyclerView.Adapter<RecommendedItemCommentAdapter.ViewHolder>() {
 
@@ -64,16 +60,8 @@ class RecommendedItemCommentAdapter(val context: Context) : RecyclerView.Adapter
         private val comment: TextView = itemView.findViewById(R.id.tv_recommended_item_comment)
 
         fun bind(recommendedItemComment: RecommendedItemComment) {
-//
-//            val date1 = LocalDateTime.parse(recommendedItemComment.lastModifiedDate)
-//            val now = LocalDateTime.now()
-//
-//            var fromTemp = LocalDateTime.from(date1)
-//            val minutes: Long = fromTemp.until(now, ChronoUnit.MONTHS)
-//            fromTemp = fromTemp.plusMinutes(minutes)
 
             commentMemberNickName.text = recommendedItemComment.member.nickName
-            //commentDate.text = recommendedItemComment.lastModifiedDate
             commentDate.text = recommendedItemComment.lastModifiedDate.diffTime()
             comment.text = recommendedItemComment.comment.replace("\\n", System.getProperty("line.separator")!!)
             GlideApp.with(context)

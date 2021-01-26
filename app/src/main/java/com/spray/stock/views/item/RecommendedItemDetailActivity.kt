@@ -1,13 +1,10 @@
 package com.spray.stock.views.item
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -16,15 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.spray.stock.R
 import com.spray.stock.adapters.RecommendedItemCommentAdapter
 import com.spray.stock.databinding.ActivityRecommendedItemDetailBinding
 import com.spray.stock.dialogs.CommentDialog
 import com.spray.stock.dialogs.CommentDialogImpl
 import com.spray.stock.viewModels.Status
+import com.spray.stock.viewModels.items.RecommendedItemCommentViewModel
 import com.spray.stock.viewModels.items.RecommendedItemViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, CommentDialog {
@@ -39,8 +35,12 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     private lateinit var mProgressBar: ProgressBar
     private val mViewModel: RecommendedItemViewModel by viewModels()
+    private val mCommentViewModel: RecommendedItemCommentViewModel by viewModels()
 
     private var mLoading: Boolean = false
+
+    private var mPage = 0
+    private var mTotalPage = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,28 +48,36 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
         setContentView(mBinding?.root!!)
         AndroidThreeTen.init(this)
 
+        mId = intent.getLongExtra("id", 1)
+
         mSwipeRefreshLayout = mBinding?.spRecommendedItemDetail!!
         mProgressBar = mBinding?.pbRecommendedItemDetail!!
-
         mLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mSwipeRefreshLayout.setOnRefreshListener(this)
         mAdapter = RecommendedItemCommentAdapter(this)
-
         mRecyclerView = mBinding?.rvRecommendedItemDetail!!
         with(mRecyclerView) {
             layoutManager = mLayoutManager
             adapter = mAdapter
         }
 
-        mId = intent.getLongExtra("id", 1)
-        getRecommendedItem(false, mId)
+        getRecommendedItemComments(false)
 
-//        mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                getRecommendedItem(true, mId)
-//                super.onScrolled(recyclerView, dx, dy)
-//            }
-//        })
+        mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val visibleItemCount = mLayoutManager.childCount
+                val pastVisibleItem = mLayoutManager.findFirstVisibleItemPosition()
+                val total = mAdapter.itemCount
+
+                if (!mLoading && mPage < mTotalPage) {
+                    if (visibleItemCount + pastVisibleItem >= total && total >= 20) {
+                        mPage++
+                        getRecommendedItemComments(false)
+                    }
+                }
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
 
         mBinding!!.btnRecommendedDetailBack.setOnClickListener {
             Toast.makeText(this, "TESTING BUTTON CLICK 1", Toast.LENGTH_SHORT).show()
@@ -93,16 +101,17 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
 //        }
     }
 
-    private fun getRecommendedItem(isRefresh: Boolean, id: Long) {
+    private fun getRecommendedItemComments(isRefresh: Boolean) {
         mLoading = true
         if (!isRefresh) mProgressBar.visibility = View.VISIBLE
 
-        mViewModel.loadRecommendedItem(id).observe(this, { networkResource ->
+        mCommentViewModel.loadRecommendedItemComments(mId, mPage).observe(this, { networkResource ->
             when (networkResource.status) {
                 Status.LOADING -> {
                 }
                 Status.SUCCESS -> {
-                    val listResponse = networkResource.data?.body()?.comments
+                    mTotalPage = networkResource.data?.body()?.totalElements!!
+                    val listResponse = networkResource.data.body()?.content
 
                     mAdapter.submitList(listResponse!!.toMutableList())
                     mProgressBar.visibility = View.GONE
@@ -120,7 +129,8 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
 
     override fun onRefresh() {
         //mAdapter.clear()
-        getRecommendedItem(true, mId)
+        mPage = 0
+        getRecommendedItemComments(true)
     }
 
     override fun onDestroy() {
