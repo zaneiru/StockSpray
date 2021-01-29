@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="12dp"
@@ -34,10 +35,13 @@
                 android:id="@+id/tv_recommended_item_comment_member_nick_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="킹왕짱임"
+                android:text="@string/str_member_nickname"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:letterSpacing="-0.07"
                 android:textSize="12sp"
+                android:includeFontPadding="false"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></TextView>
+                app:layout_constraintTop_toTopOf="parent" />
             <!-- end of 코멘트 작성자 닉네임 -->
 
             <!-- start of 코멘트 작성일 -->
@@ -46,26 +50,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="9개월전"
+                android:text="@string/str_last_modified_date_diff"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:letterSpacing="-0.07"
                 android:textSize="12sp"
+                android:includeFontPadding="false"
                 app:layout_constraintStart_toEndOf="@+id/tv_recommended_item_comment_member_nick_name"
                 app:layout_constraintTop_toTopOf="parent" />
             <!-- end of 코멘트 작성일 -->
 
-            <!-- start of 코멘트 -->
+            <!-- start of 버튼 -->
+            <ImageButton
+                android:id="@+id/button"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="end"
+                android:src="@drawable/ic_filled_horizontal_dot_menu"
+                android:backgroundTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!-- end of 버튼 -->
+
+            <!-- start of 댓글 -->
             <TextView
                 android:id="@+id/tv_recommended_item_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/noto_sans"
-                android:letterSpacing="-0.04"
-                android:text="여러분 현실 프로그래머는 90%는 모니터 노려보기 10%가 코드 입력하기 합니다.\n타닥타닥대는건 카톡으로 노닥거리고 있는거구요"
+                android:layout_marginTop="4dp"
+                android:letterSpacing="-0.07"
+                android:text="@string/recommended_item_comment"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
                 android:textColor="#000000"
                 android:textSize="14sp"
+                android:includeFontPadding="false"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_recommended_item_comment_member_nick_name" />
-            <!-- end of 코멘트 -->
+            <!-- end of 댓글 -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- end of 코멘트 영역 -->

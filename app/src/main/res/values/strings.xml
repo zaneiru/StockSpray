@@ -16,4 +16,16 @@
     <string name="intro_logo_app_name">빨간맛 주식</string>
     <string name="recommended_item">테마 추천</string>
     <string name="comment_pre_text">공개 댓글을 남겨 주세요.</string>
+    <string name="recommended_item_comment"><![CDATA[테마추천 > 댓글영역]]></string>
+    <string name="txt_recommend_detail_policy">제공되는 분석 자료는 해당 종목에 대한 참고자료이며, 투자에 대한 책임은\n전적으로 이용자에게 있음을 고지합니다.</string>
+    <string name="tx_like_count">조회수</string>
+    <string name="txt_like_count">좋아요 수</string>
+    <string name="str_view_count">조회수</string>
+    <string name="str_yyyyMMddHHmm">yyyy.MM.dd HH:mm</string>
+    <string name="str_activity_recommended_item_title">테마 추천</string>
+    <string name="str_back_go">뒤로가기</string>
+    <string name="str_icon_view_count_desc">조회수 아이콘</string>
+    <string name="str_btn_like">좋아요버튼</string>
+    <string name="str_member_nickname">회원닉네임</string>
+    <string name="str_last_modified_date_diff">작성날짜 DIFF</string>
 </resources>

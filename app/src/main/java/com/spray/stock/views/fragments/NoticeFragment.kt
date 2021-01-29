@@ -99,7 +99,6 @@ class NoticeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                     if (listResponse != null){
                         mAdapter.addList(listResponse)
                     }
-
                     mProgressBar.visibility = View.GONE
                     mLoading = false
                     mBinding?.spNoticeBoard?.isRefreshing = false

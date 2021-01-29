@@ -1,502 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".views.item.RecommendedItemDetailActivity"
-    android:background="#ffffff"
-    android:orientation="vertical"
-    android:id="@+id/activity_recommended_item_detail"
-    >
-
-    <!-- start of 액션바 영역 -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="12dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-
-            <!-- start of 액션바 백 버튼 -->
-<!--            <ImageButton-->
-<!--                android:id="@+id/btn_recommended_detail_item_back"-->
-<!--                android:layout_width="42dp"-->
-<!--                android:layout_height="18dp"-->
-<!--                android:layout_marginBottom="1dp"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                android:layout_gravity="center_vertical"-->
-<!--                -->
-<!--                app:srcCompat="@drawable/ic_left_arrow"-->
-<!--                android:contentDescription="TODO" />-->
-            <!-- end of 액션바 백 버튼 -->
-
-            <!-- start of 액션바 종목 이름 -->
-
-                <ImageButton
-                    android:id="@+id/btn_recommended_detail_back"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="6dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_solid_arrow_left"
-                    android:background="@drawable/ripple_bg_white"
-                    android:clickable="true"
-                    android:onClick="onClick"
-                    tools:ignore="OnClick" />
-
-
-
-            <TextView
-                android:id="@+id/tv_recommended_detail_item_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="12dp"
-                android:fontFamily="@font/noto_sans_bold"
-                android:letterSpacing="-0.08"
-                android:text="삼성바이오로직스"
-                android:textColor="#1C1C1C"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/btn_recommended_detail_item_back"
-                app:layout_constraintTop_toTopOf="@+id/btn_recommended_detail_item_back"></TextView>
-
-            <!-- end of 액션바 종목 이름 -->
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!-- end of 액션바 영역 -->
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="@drawable/bar_shadow_down"/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp"
-        android:orientation="vertical"
-        >
-
-        <!-- start of 본문 영역 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:orientation="vertical"
-            android:layout_marginTop="6dp"
-            >
-
-            <!-- start of 테마 추천 제목 -->
-            <TextView
-                android:id="@+id/tv_recommended_detail_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_sans_bold"
-                android:letterSpacing="-0.04"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:text="삼성전자 반도체 상장 테마 - 1.12(화) 상한가 분석" />
-            <!-- end of 테마 추천 제목 -->
-
-            <!-- start of 이용고지 -->
-            <TextView
-                android:id="@+id/tv_recommended_detail_caution"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/noto_sans_bold"
-                android:letterSpacing="-0.04"
-                android:textColor="#BF2626"
-                android:textSize="12sp"
-                android:text="제공되는 분석 자료는 해당 종목에 대한 참고자료이며, 투자에 대한 책임은\n전적으로 이용자에게 있음을 고지합니다." />
-            <!-- end of 이용고지 -->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/tv_recommended_item_detail_code"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="1dp"
-                            android:layout_marginTop="8dp"
-                            android:fontFamily="@font/noto_sans_bold"
-                            android:letterSpacing="-0.04"
-                            android:text="005380"
-                            android:textColor="#000000"
-                            android:textSize="13sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/textView15"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:layout_marginTop="9dp"
-                            android:fontFamily="@font/noto_sans"
-                            android:letterSpacing="-0.04"
-                            android:text="KOSPI"
-                            android:textColor="#807F7F"
-                            android:textSize="12sp"
-                            app:layout_constraintStart_toEndOf="@+id/tv_recommended_item_detail_code"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/textView16"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/noto_sans_bold"
-                            android:letterSpacing="-0.04"
-                            android:text="삼성바이오로직스"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_recommended_item_detail_code" />
-
-                        <TextView
-                            android:id="@+id/textView17"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="1dp"
-                            android:fontFamily="@font/noto_sans_bold"
-                            android:letterSpacing="-0.04"
-                            android:text="794,000"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-                        <TextView
-                            android:id="@+id/textView18"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="2dp"
-                            android:layout_marginTop="6dp"
-                            android:fontFamily="@font/noto_sans"
-                            android:letterSpacing="-0.04"
-                            android:text="원"
-                            android:textColor="#000000"
-                            android:textSize="10sp"
-                            app:layout_constraintStart_toEndOf="@+id/textView17"
-                            app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-
-                        <ImageView
-                            android:id="@+id/imageView7"
-                            android:layout_width="160dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="right"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ss_bio" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#dedede"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <!-- start of 왼쪽 정보 -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginEnd="6dp"
-                        android:layout_weight="1">
-
-                        <!-- start of 왼쪽정보 : 전일 -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="32dp"
-                            android:orientation="horizontal"
-                            android:layout_gravity="center_vertical"
-                            android:weightSum="2">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:fontFamily="@font/noto_sans"
-                                android:letterSpacing="-0.04"
-                                android:textColor="#616161"
-                                android:textSize="12sp"
-                                android:text="전일"
-                                android:layout_weight="1">
-
-                            </TextView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="end"
-                                android:fontFamily="@font/noto_sans_bold"
-                                android:letterSpacing="-0.04"
-                                android:layout_gravity="right|center_vertical"
-                                android:textColor="#616161"
-                                android:textSize="14sp"
-                                android:text="796,000"
-                                android:layout_weight="1">
-
-                            </TextView>
-
-
-                        </LinearLayout>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#dedede"/>
-                        <!-- end of 왼쪽정보 : 전일 -->
-
-                    </LinearLayout>
-                    <!-- end of 왼쪽 정보 -->
-
-                    <!-- start of 오른쪽 정보 -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginStart="6dp"
-                        android:layout_weight="1">
-
-                        <!-- start of 왼쪽정보 : 시가 -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="32dp"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:fontFamily="@font/noto_sans"
-                                android:letterSpacing="-0.04"
-                                android:textColor="#616161"
-                                android:textSize="12sp"
-                                android:text="시가"
-                                android:layout_weight="1">
-
-                            </TextView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right|center_vertical"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/noto_sans_bold"
-                                android:gravity="end"
-                                android:letterSpacing="-0.04"
-                                android:text="799,000"
-                                android:textColor="#FD0303"
-                                android:textSize="14sp">
-
-                            </TextView>
-
-                        </LinearLayout>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#dedede"/>
-                        <!-- end of 왼쪽정보 : 시가 -->
-
-                    </LinearLayout>
-                    <!-- end of 오른쪽 정보 -->
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-        <!-- end of 본문 영역 -->
-
-
-
-        <!-- start of 댓글 영역 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:background="#dedede"
-                >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="14dp"
-                    android:text="댓글을 작성할 때는 타인을 존중하고 댓글 가이드를 준수해야 합니다."
-                    android:fontFamily="@font/noto_sans"
-                    android:letterSpacing="-0.04"
-                    android:textSize="13sp"
-                    android:textColor="#434343">
-
-                </TextView>
-
-            </FrameLayout>
-
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans"
-                    android:letterSpacing="-0.04"
-                    android:textColor="#000000"
-                    android:textSize="14sp"
-                    android:layout_gravity="center_vertical"
-                    android:text="댓글">
-
-                </TextView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans"
-                    android:letterSpacing="-0.04"
-                    android:textColor="#5C5B5B"
-                    android:textSize="14sp"
-                    android:layout_marginStart="4dp"
-                    android:layout_gravity="center_vertical"
-                    android:text="5">
-
-                </TextView>
-
-            </LinearLayout>
-
-        </LinearLayout>
-        <!-- end of 댓글 영역 -->
-
-        <!-- start of 댓글쓰기 영역 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
-
-                <TextView
-                    android:id="@+id/btn_write"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="코멘트를 달아보자"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
-        <!-- end of 댓글쓰기 영역 -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/spRecommendedItemDetail"
-                android:layout_width="match_parent"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginBottom="0dp"
-                android:padding="0dp"
-                android:paddingLeft="0dp"
-                android:paddingTop="0dp"
-                android:paddingRight="0dp"
-                android:paddingBottom="0dp"
-                android:visibility="visible"
-                tools:context=".views.item.RecommendedItemDetailActivity"
-                tools:visibility="visible">
-
-                <ScrollView
-                    android:id="@+id/svRecommendedItemDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvRecommendedItemDetail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                        <ProgressBar
-                            android:id="@+id/pbRecommendedItemDetail"
-                            android:layout_width="match_parent"
-                            android:layout_height="48dp"
-                            android:layout_gravity="center_horizontal|center_vertical"
-                            android:outlineAmbientShadowColor="#F23748"
-                            android:indeterminateTint="#F23748"
-                            />
-                    </LinearLayout>
-                </ScrollView>
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-</LinearLayout>
+<?xml version="1.0" encoding="utf-8"?><LinearLayout    xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:app="http://schemas.android.com/apk/res-auto"    xmlns:tools="http://schemas.android.com/tools"    android:layout_width="match_parent"    android:layout_height="match_parent"    tools:context=".views.item.RecommendedItemDetailActivity"    android:background="#ffffff"    android:orientation="vertical"    android:id="@+id/activity_recommended_item_detail"    >    <!-- start of 액션바 영역 -->    <androidx.constraintlayout.widget.ConstraintLayout        android:layout_width="wrap_content"        android:layout_height="wrap_content"        android:layout_marginTop="16dp"        android:layout_marginBottom="12dp">        <LinearLayout            android:layout_width="match_parent"            android:layout_height="wrap_content"            android:orientation="horizontal"            app:layout_constraintBottom_toBottomOf="parent"            app:layout_constraintEnd_toEndOf="parent"            app:layout_constraintStart_toStartOf="parent"            app:layout_constraintTop_toTopOf="parent">            <!-- start of 액션바 종목 이름 -->            <ImageButton                android:id="@+id/btn_recommended_detail_back"                android:layout_width="16dp"                android:layout_height="16dp"                android:layout_marginStart="14dp"                android:layout_marginTop="6dp"                android:padding="10dp"                android:src="@drawable/ic_solid_arrow_left"                android:background="@drawable/ripple_bg_white"                android:clickable="true"                android:onClick="onClick"                tools:ignore="OnClick"                android:focusable="true"                android:contentDescription="@string/str_back_go" />            <TextView                android:id="@+id/tv_recommended_detail_item_name"                android:layout_width="wrap_content"                android:layout_height="wrap_content"                android:layout_gravity="center_vertical"                android:layout_marginStart="12dp"                android:fontFamily="@font/noto_sans_cjk_kr_regular"                android:letterSpacing="-0.07"                android:text="테마추천"                android:textColor="#1C1C1C"                android:textSize="18sp"                android:textStyle="bold"                app:layout_constraintStart_toEndOf="@+id/btn_recommended_detail_item_back"                app:layout_constraintTop_toTopOf="@+id/btn_recommended_detail_item_back"                android:includeFontPadding="false"                 />            <!-- app:drawableStartCompat="@drawable/ic_txt_theme_recommend"  -->            <!-- end of 액션바 종목 이름 -->        </LinearLayout>    </androidx.constraintlayout.widget.ConstraintLayout>    <!-- end of 액션바 영역 -->    <View        android:layout_width="match_parent"        android:layout_height="8dp"        android:background="@drawable/bar_shadow_down"/>    <LinearLayout        android:layout_width="match_parent"        android:layout_height="match_parent"        android:layout_marginStart="14dp"        android:layout_marginEnd="14dp"        android:orientation="vertical">        <RelativeLayout            android:layout_width="wrap_content"            android:layout_height="wrap_content">            <ProgressBar                style="?android:attr/progressBarStyleInverse"                android:id="@+id/pbRecommendedItemDetail"                android:layout_width="match_parent"                android:layout_height="48dp"                android:layout_centerInParent="true"                android:indeterminateTint="#F23748"                />            <!-- start of 본문 영역 -->            <LinearLayout                android:id="@+id/ll_recommended_detail_content_area"                android:layout_width="match_parent"                android:layout_height="wrap_content"                android:orientation="vertical"                android:layout_marginTop="6dp"                >                <!-- start of 테마 추천 제목 -->                <TextView                    android:id="@+id/tv_recommended_detail_title"                    android:layout_width="match_parent"                    android:layout_height="wrap_content"                    android:fontFamily="@font/noto_sans_cjk_kr_regular"                    android:letterSpacing="-0.07"                    android:text="삼성전자 반도체 상장 테마 - 1.12(화) 상한가 분석"                    android:textColor="#000000"                    android:textSize="18sp"                    android:includeFontPadding="false"                    />                <!-- end of 테마 추천 제목 -->                <!-- start of 이용고지 -->                <TextView                    android:id="@+id/tv_recommended_detail_caution"                    android:layout_width="match_parent"                    android:layout_height="wrap_content"                    android:layout_marginTop="8dp"                    android:fontFamily="@font/noto_sans_cjk_kr_regular"                    android:letterSpacing="-0.07"                    android:textColor="#BF2626"                    android:textSize="12sp"                    android:text="제공되는 분석 자료는 해당 종목에 대한 참고자료이며, 투자에 대한 책임은\n전적으로 이용자에게 있음을 고지합니다."                    android:includeFontPadding="false"/>                <!-- end of 이용고지 -->                <View                    android:layout_width="match_parent"                    android:layout_height="1dp"                    android:layout_marginTop="8dp"                    android:layout_marginBottom="8dp"                    android:background="#dedede"/>                <LinearLayout                    android:layout_width="match_parent"                    android:layout_height="wrap_content"                    android:orientation="vertical">                    <androidx.constraintlayout.widget.ConstraintLayout                        android:layout_width="match_parent"                        android:layout_height="wrap_content"                        android:layout_marginBottom="6dp">                        <TextView                            android:id="@+id/tv_recommended_detail_date"                            android:layout_width="wrap_content"                            android:layout_height="wrap_content"                            android:fontFamily="@font/noto_sans_cjk_kr_regular"                            android:letterSpacing="-0.04"                            android:textColor="#000000"                            android:textSize="12sp"                            android:text="@string/str_yyyyMMddHHmm"                            app:layout_constraintStart_toStartOf="parent"                            app:layout_constraintTop_toTopOf="parent"                            android:includeFontPadding="false" />                        <ImageButton                            android:id="@+id/ib_recommended_detail_like"                            android:layout_width="22dp"                            android:layout_height="22dp"                            android:layout_marginEnd="6dp"                            android:backgroundTint="@color/white"                            app:layout_constraintEnd_toStartOf="@+id/tv_recommended_detail_top_like_count"                            app:layout_constraintTop_toTopOf="parent"                            app:srcCompat="@drawable/ic_empty_like"                            android:contentDescription="@string/str_btn_like" />                        <TextView                            android:id="@+id/tv_recommended_detail_top_like_count"                            android:layout_width="wrap_content"                            android:layout_height="wrap_content"                            android:layout_marginTop="1dp"                            android:layout_marginEnd="10dp"                            android:fontFamily="@font/noto_sans_cjk_kr_regular"                            android:letterSpacing="-0.04"                            android:textColor="#000000"                            android:textSize="12sp"                            android:text="좋아요 조회수"                            app:layout_constraintEnd_toStartOf="@+id/ib_recommended_detail_view"                            app:layout_constraintTop_toTopOf="parent"                            android:includeFontPadding="false"/>                        <ImageView                            android:id="@+id/ib_recommended_detail_view"                            android:layout_width="18dp"                            android:layout_height="18dp"                            android:layout_marginEnd="6dp"                            android:backgroundTint="#000000"                            app:layout_constraintEnd_toStartOf="@+id/tv_recommended_detail_top_view_count"                            app:layout_constraintTop_toTopOf="parent"                            app:srcCompat="@drawable/ic_round_eyes"                            android:contentDescription="@string/str_icon_view_count_desc" />                        <TextView                            android:id="@+id/tv_recommended_detail_top_view_count"                            android:layout_width="wrap_content"                            android:layout_height="wrap_content"                            android:layout_marginTop="1dp"                            android:layout_marginEnd="2dp"                            android:fontFamily="@font/noto_sans_cjk_kr_regular"                            android:letterSpacing="-0.04"                            android:textColor="#000000"                            android:textSize="12sp"                            android:text="좋아요 조회수"                            app:layout_constraintEnd_toEndOf="parent"                            app:layout_constraintTop_toTopOf="parent"                            android:includeFontPadding="false"/>                    </androidx.constraintlayout.widget.ConstraintLayout>                    <TextView                        android:layout_width="match_parent"                        android:layout_height="match_parent"                        android:layout_marginBottom="6dp"                        android:fontFamily="@font/noto_sans_cjk_kr_regular"                        android:letterSpacing="-0.07"                        android:textColor="#000000"                        android:textSize="14sp"                        android:includeFontPadding="false"                        android:text="컨텐츠 영역입니다.">                    </TextView>                </LinearLayout>            </LinearLayout>            <!-- end of 본문 영역 -->        </RelativeLayout>        <!-- start of 댓글 영역 -->        <LinearLayout            android:layout_width="match_parent"            android:layout_height="wrap_content"            android:orientation="vertical"            >            <FrameLayout                android:layout_width="match_parent"                android:layout_height="36dp"                android:background="#dedede"                >                <TextView                    android:layout_width="match_parent"                    android:layout_height="wrap_content"                    android:layout_gravity="center_vertical"                    android:layout_marginStart="14dp"                    android:fontFamily="@font/noto_sans_cjk_kr_regular"                    android:letterSpacing="-0.07"                    android:text="댓글을 작성할 때는 타인을 존중하고 댓글 가이드를 준수해야 합니다."                    android:textColor="#434343"                    android:textSize="12sp"                    android:includeFontPadding="false" />            </FrameLayout>            <LinearLayout                android:layout_width="wrap_content"                android:layout_height="wrap_content"                android:orientation="horizontal"                android:layout_marginTop="10dp">                <TextView                    android:layout_width="wrap_content"                    android:layout_height="wrap_content"                    android:fontFamily="@font/noto_sans"                    android:letterSpacing="-0.04"                    android:textColor="#000000"                    android:textSize="14sp"                    android:layout_gravity="center_vertical"                    android:text="댓글">                </TextView>                <TextView                    android:layout_width="wrap_content"                    android:layout_height="wrap_content"                    android:fontFamily="@font/noto_sans"                    android:letterSpacing="-0.04"                    android:textColor="#5C5B5B"                    android:textSize="14sp"                    android:layout_marginStart="4dp"                    android:layout_gravity="center_vertical"                    android:text="5">                </TextView>            </LinearLayout>        </LinearLayout>        <!-- end of 댓글 영역 -->        <!-- start of 댓글쓰기 영역 -->        <LinearLayout            android:layout_width="match_parent"            android:layout_height="30dp">            <androidx.constraintlayout.widget.ConstraintLayout                android:layout_width="match_parent"                android:layout_height="30dp">                <TextView                    android:id="@+id/btn_write"                    android:layout_width="wrap_content"                    android:layout_height="wrap_content"                    android:text="코멘트를 달아보자"                    app:layout_constraintBottom_toBottomOf="parent"                    app:layout_constraintEnd_toEndOf="parent"                    app:layout_constraintStart_toStartOf="parent"                    app:layout_constraintTop_toTopOf="parent" />            </androidx.constraintlayout.widget.ConstraintLayout>        </LinearLayout>        <!-- end of 댓글쓰기 영역 -->        <LinearLayout            android:layout_width="match_parent"            android:layout_height="match_parent">            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout                android:id="@+id/spRecommendedItemDetail"                android:layout_width="match_parent"                android:layout_gravity="center_vertical|center_horizontal"                android:layout_height="wrap_content"                android:layout_margin="0dp"                android:layout_marginStart="0dp"                android:layout_marginLeft="0dp"                android:layout_marginTop="0dp"                android:layout_marginEnd="0dp"                android:layout_marginRight="0dp"                android:layout_marginBottom="0dp"                android:padding="0dp"                android:paddingLeft="0dp"                android:paddingTop="0dp"                android:paddingRight="0dp"                android:paddingBottom="0dp"                android:visibility="visible"                tools:context=".views.item.RecommendedItemDetailActivity"                tools:visibility="visible">                <ScrollView                    android:id="@+id/svRecommendedItemDetail"                    android:layout_width="match_parent"                    android:layout_height="match_parent">                    <RelativeLayout                        android:layout_width="match_parent"                        android:layout_height="wrap_content"                        android:orientation="vertical">                        <androidx.recyclerview.widget.RecyclerView                            android:id="@+id/rvRecommendedItemDetail"                            android:layout_width="match_parent"                            android:layout_height="wrap_content" />                        <ProgressBar                            android:id="@+id/pbRecommendedItemComments"                            android:layout_width="match_parent"                            android:layout_height="48dp"                            android:layout_centerInParent="true"                            android:indeterminateTint="#F23748"                            />                    </RelativeLayout>                </ScrollView>            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>        </LinearLayout>    </LinearLayout></LinearLayout>

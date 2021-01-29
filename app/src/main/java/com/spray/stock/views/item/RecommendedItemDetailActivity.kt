@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -32,8 +33,10 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
 
     private lateinit var mAdapter: RecommendedItemCommentAdapter
     private lateinit var mLayoutManager: LinearLayoutManager
+    private lateinit var mLayout: LinearLayout
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     private lateinit var mProgressBar: ProgressBar
+    private lateinit var mProgressBarComment: ProgressBar
     private val mViewModel: RecommendedItemViewModel by viewModels()
     private val mCommentViewModel: RecommendedItemCommentViewModel by viewModels()
 
@@ -48,10 +51,18 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
         setContentView(mBinding?.root!!)
         AndroidThreeTen.init(this)
 
-        mId = intent.getLongExtra("id", 1)
+        //mId = intent.getLongExtra("id", 1)
+        mId = 1
+
+        // 테마추천 상세 정보
+        getRecommendedItem()
+
+        mLayout = mBinding!!.llRecommendedDetailContentArea
+        mLayout.visibility = View.INVISIBLE
 
         mSwipeRefreshLayout = mBinding?.spRecommendedItemDetail!!
-        mProgressBar = mBinding?.pbRecommendedItemDetail!!
+        mProgressBar = mBinding!!.pbRecommendedItemDetail
+        mProgressBarComment = mBinding!!.pbRecommendedItemComments
         mLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mSwipeRefreshLayout.setOnRefreshListener(this)
         mAdapter = RecommendedItemCommentAdapter(this)
@@ -61,6 +72,7 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
             adapter = mAdapter
         }
 
+        // 댓글 목록
         getRecommendedItemComments(false)
 
         mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -101,6 +113,38 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
 //        }
     }
 
+    private fun getRecommendedItem() {
+        mViewModel.loadRecommendedItem(mId).observe(this, { networkResource ->
+            when (networkResource.status) {
+                Status.LOADING -> {
+                }
+                Status.SUCCESS -> {
+                    val response = networkResource.data!!.body()!!
+
+                    with (response) {
+                        mBinding!!.apply {
+                            tvRecommendedDetailTitle.text = response.title
+                            tvRecommendedDetailDate.text = response.lastModifiedDate
+                            tvRecommendedDetailTopLikeCount.text = response.likeCount.toString()
+                            tvRecommendedDetailTopViewCount.text = response.viewCount.toString()
+                        }
+                    }
+
+                    mLayout.visibility = View.VISIBLE
+                    mProgressBar.visibility = View.GONE
+
+//                    mLoading = false
+//                    mBinding?.spRecommendedItemDetail?.isRefreshing = false
+                }
+                Status.ERROR -> {
+                    mProgressBar.visibility = View.GONE
+//                    mLoading = false
+//                    mBinding?.spRecommendedItemDetail?.isRefreshing = false
+                }
+            }
+        })
+    }
+
     private fun getRecommendedItemComments(isRefresh: Boolean) {
         mLoading = true
         if (!isRefresh) mProgressBar.visibility = View.VISIBLE
@@ -111,15 +155,15 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
                 }
                 Status.SUCCESS -> {
                     mTotalPage = networkResource.data?.body()?.totalElements!!
-                    val listResponse = networkResource.data.body()?.content
+                    val response = networkResource.data.body()?.content
 
-                    mAdapter.submitList(listResponse!!.toMutableList())
-                    mProgressBar.visibility = View.GONE
+                    mAdapter.submitList(response!!.toMutableList())
+                    mProgressBarComment.visibility = View.GONE
                     mLoading = false
                     mBinding?.spRecommendedItemDetail?.isRefreshing = false
                 }
                 Status.ERROR -> {
-                    mProgressBar.visibility = View.GONE
+                    mProgressBarComment.visibility = View.GONE
                     mLoading = false
                     mBinding?.spRecommendedItemDetail?.isRefreshing = false
                 }
@@ -128,7 +172,6 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
     }
 
     override fun onRefresh() {
-        //mAdapter.clear()
         mPage = 0
         getRecommendedItemComments(true)
     }
@@ -142,4 +185,6 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
     override fun onCommentWriteClicked() {
         Log.d("메인 액티비티 로그", "메인 액티비에서 넘어왔어용!")
     }
+
+    fun onClick(view: View) {}
 }
