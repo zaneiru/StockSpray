@@ -9,6 +9,7 @@
 
     <application
         android:name=".config.StockApplication"
+        android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:icon="@drawable/appicon"
         android:label="@string/app_name"
@@ -18,17 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StockSpray"
         android:usesCleartextTraffic="true"
-        android:windowSoftInputMode="stateVisible"
-        tools:targetApi="n">
-        <activity android:name=".views.item.TestActivity"></activity>
+        android:windowSoftInputMode="stateVisible">
         <activity
             android:name=".views.item.RecommendedItemDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".views.LogoActivity"
@@ -49,7 +44,14 @@
             android:parentActivityName=".views.IntroActivity" />
         <activity
             android:name=".views.MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

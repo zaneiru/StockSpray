@@ -51,8 +51,7 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
         setContentView(mBinding?.root!!)
         AndroidThreeTen.init(this)
 
-        //mId = intent.getLongExtra("id", 1)
-        mId = 1
+        mId = intent.getLongExtra("id", 1)
 
         // 테마추천 상세 정보
         getRecommendedItem()
@@ -90,10 +89,10 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
                 super.onScrolled(recyclerView, dx, dy)
             }
         })
-
-        mBinding!!.btnRecommendedDetailBack.setOnClickListener {
-            Toast.makeText(this, "TESTING BUTTON CLICK 1", Toast.LENGTH_SHORT).show()
-        }
+//
+//        mBinding!!.btnRecommendedDetailBack.setOnClickListener {
+//            Toast.makeText(this, "TESTING BUTTON CLICK 1", Toast.LENGTH_SHORT).show()
+//        }
 
         // 코멘트 작성 클릭시 코멘트 다이얼로그 show
         val commentDialogImpl = CommentDialogImpl(this, this)
@@ -103,6 +102,10 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
                 setGravity(Gravity.BOTTOM)
             }
             commentDialogImpl.show()
+        }
+
+        mBinding!!.tbRecommendedDetail.setNavigationOnClickListener {
+            onBackPressed();
         }
 
         // 테마 추천 상세 화면 (레이아웃) 클릭시 키보드 비활성화

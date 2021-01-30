@@ -1,7 +1,9 @@
 package com.spray.stock.views.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +18,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.spray.stock.R
 import com.spray.stock.adapters.RecommendedItemAdapter
 import com.spray.stock.databinding.FragmentMainBinding
+import com.spray.stock.models.item.RecommendedItem
 import com.spray.stock.viewModels.Status
 import com.spray.stock.viewModels.items.RecommendedItemViewModel
+import com.spray.stock.views.IntroActivity
+import com.spray.stock.views.ItemActivity
+import com.spray.stock.views.item.RecommendedItemDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,7 +48,11 @@ class MainFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         activity?.title = "추천종목";
+
+        mBinding = FragmentMainBinding.inflate(inflater, container, false)
+
         mBinding = FragmentMainBinding.inflate(inflater, container, false)
         mRecyclerView = mBinding?.rvRecommendedItem!!
         mSwipeRefreshLayout = mBinding?.spRecommendedItem!!
@@ -57,6 +67,7 @@ class MainFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         mProgressBar = mBinding?.pbRecommendedItem!!
         mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mSwipeRefreshLayout.setOnRefreshListener(this)
+       // mAdapter = context?.let { RecommendedItemAdapter(it) }!!
         mAdapter = context?.let { RecommendedItemAdapter(it) }!!
         with(mRecyclerView) {
             setHasFixedSize(false)
@@ -73,6 +84,7 @@ class MainFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         getRecommendedItems(false)
 
+        // 목록 스크롤
         mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItemCount = mLayoutManager.childCount
@@ -88,11 +100,19 @@ class MainFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 super.onScrolled(recyclerView, dx, dy)
             }
         })
+
+        // 목록 클릭 이벤트
+        mAdapter.setItemClickListener(object : RecommendedItemAdapter.ItemClickListener {
+            override fun onClick(view: View, position: Int, data: RecommendedItem) {
+                val intent = Intent(activity, RecommendedItemDetailActivity::class.java)
+                intent.putExtra("id", data.id)
+                startActivity(intent)
+            }
+        })
     }
 
-    private fun getRecommendedItems(isRefresh: Boolean) {
-        mLoading = true
-        if (!isRefresh) mProgressBar.visibility = View.VISIBLE
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         mViewModel.loadRecommendedItems(mPage).observe(viewLifecycleOwner, { networkResource ->
             when (networkResource.status) {
@@ -107,7 +127,33 @@ class MainFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                     mProgressBar.visibility = View.GONE
                     mLoading = false
                     mBinding?.spRecommendedItem?.isRefreshing = false
+                }
+                Status.ERROR -> {
+                    mProgressBar.visibility = View.GONE
+                    mLoading = false
+                    mBinding?.spRecommendedItem?.isRefreshing = false
+                }
+            }
+        })
+    }
 
+    private fun getRecommendedItems(isRefresh: Boolean) {
+        mLoading = true
+        if (!isRefresh) mProgressBar.visibility = View.VISIBLE
+
+        mViewModel.loadRecommendedItems(mPage).observe(viewLifecycleOwner, { resource ->
+            when (resource.status) {
+                Status.LOADING -> {
+                }
+                Status.SUCCESS -> {
+                    mTotalPage = resource.data?.body()?.totalElements!!
+
+                    val listResponse = resource.data.body()?.content
+
+                    mAdapter.submitList(listResponse?.toMutableList())
+                    mProgressBar.visibility = View.GONE
+                    mLoading = false
+                    mBinding?.spRecommendedItem?.isRefreshing = false
                 }
                 Status.ERROR -> {
                     mProgressBar.visibility = View.GONE

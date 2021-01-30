@@ -1,0 +1,1 @@
+package com.spray.stock.modelsdata class Tag (    val id: Long,    val name: String)

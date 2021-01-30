@@ -28,4 +28,5 @@
     <string name="str_btn_like">좋아요버튼</string>
     <string name="str_member_nickname">회원닉네임</string>
     <string name="str_last_modified_date_diff">작성날짜 DIFF</string>
+    <string name="str_tb_recommended_item_title">테마추천</string>
 </resources>

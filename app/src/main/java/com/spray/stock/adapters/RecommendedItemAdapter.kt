@@ -19,7 +19,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class RecommendedItemAdapter @Inject constructor(val context: Context) : RecyclerView.Adapter<RecommendedItemAdapter.ViewHolder>() {
+class RecommendedItemAdapter @Inject constructor(val context: Context) :
+    RecyclerView.Adapter<RecommendedItemAdapter
+    .ViewHolder>() {
 
     private lateinit var mView: View
     private var mRecommendedItems = mutableListOf<RecommendedItem>()
@@ -41,8 +43,25 @@ class RecommendedItemAdapter @Inject constructor(val context: Context) : Recycle
 
     override fun getItemCount(): Int = mAsyncDiff.currentList.size
 
+    //클릭 인터페이스 정의
+    interface ItemClickListener {
+        fun onClick(view: View, position: Int, data: RecommendedItem)
+    }
+
+    //클릭리스너 선언
+    private lateinit var itemClickListener: ItemClickListener
+
+    //클릭리스너 등록 매소드
+    fun setItemClickListener(itemClickListener: ItemClickListener) {
+        this.itemClickListener = itemClickListener
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mAsyncDiff.currentList[position])
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position, mRecommendedItems[position])
+        }
     }
 
     fun submitList(recommendedItems: MutableList<RecommendedItem>?) {
@@ -80,5 +99,7 @@ class RecommendedItemAdapter @Inject constructor(val context: Context) : Recycle
                 .transform(CenterInside(), RoundedCorners(12))
                 .into(bannerUrl)
         }
+
     }
+
 }

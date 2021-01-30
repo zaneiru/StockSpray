@@ -1,0 +1,1 @@
+package com.spray.stock.models.itemimport com.spray.stock.models.Tagdata class Report (    val id: Long,    val title: String,    val contents: String,    val reportDate: String,    val viewCount: Int,    val fileUrl: String,    val tags: List<Tag>)
