@@ -1,6 +1,7 @@
 package com.spray.stock.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -86,6 +87,9 @@ class RecommendedItemAdapter @Inject constructor(val context: Context) :
         private val bannerUrl: ImageView = itemView.findViewById(R.id.iv_recommended_banner_url)
 
         fun bind(recommendedItem: RecommendedItem) {
+
+            Log.d("RecommendedItemAdapter", recommendedItem.bannerMainTitle)
+
             lastModifiedDate.text = recommendedItem.lastModifiedDate
             bannerMainTitle.text = recommendedItem.bannerMainTitle
             bannerSubTitle.text = recommendedItem.bannerSubTitle

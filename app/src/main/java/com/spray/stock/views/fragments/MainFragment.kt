@@ -48,11 +48,7 @@ class MainFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         activity?.title = "추천종목";
-
-        mBinding = FragmentMainBinding.inflate(inflater, container, false)
-
         mBinding = FragmentMainBinding.inflate(inflater, container, false)
         mRecyclerView = mBinding?.rvRecommendedItem!!
         mSwipeRefreshLayout = mBinding?.spRecommendedItem!!
@@ -67,7 +63,6 @@ class MainFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         mProgressBar = mBinding?.pbRecommendedItem!!
         mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mSwipeRefreshLayout.setOnRefreshListener(this)
-       // mAdapter = context?.let { RecommendedItemAdapter(it) }!!
         mAdapter = context?.let { RecommendedItemAdapter(it) }!!
         with(mRecyclerView) {
             setHasFixedSize(false)

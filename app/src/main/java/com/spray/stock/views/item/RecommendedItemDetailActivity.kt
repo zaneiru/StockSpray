@@ -126,10 +126,10 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
 
                     with (response) {
                         mBinding!!.apply {
-                            tvRecommendedDetailTitle.text = response.title
-                            tvRecommendedDetailDate.text = response.lastModifiedDate
-                            tvRecommendedDetailTopLikeCount.text = response.likeCount.toString()
-                            tvRecommendedDetailTopViewCount.text = response.viewCount.toString()
+                            tvRecommendedDetailTitle.text = title
+                            tvRecommendedDetailDate.text = lastModifiedDate
+                            tvRecommendedDetailTopLikeCount.text = likeCount.toString()
+                            tvRecommendedDetailTopViewCount.text = viewCount.toString()
                         }
                     }
 
