@@ -61,14 +61,15 @@
 
             <!-- start of 버튼 -->
             <ImageButton
-                android:id="@+id/button"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:id="@+id/ib_recommended_detail_comment_popup"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
                 android:layout_gravity="end"
-                android:src="@drawable/ic_filled_horizontal_dot_menu"
+                android:src="@drawable/ic_filled_horizontal_small_dot_menu"
                 android:backgroundTint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="onClick"/>
             <!-- end of 버튼 -->
 
             <!-- start of 댓글 -->

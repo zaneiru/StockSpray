@@ -39,7 +39,7 @@ android {
             splits.density.enable = false
             ext.enableCrashlytics = false
             buildConfigField "String", NOTICE_BASE_URL, '"http://192.168.35.77:8089/"'
-            buildConfigField "String", ITEM_BASE_URL, '"http://192.168.35.116:8091/"'
+            buildConfigField "String", ITEM_BASE_URL, '"http://192.168.35.204:8091/"'
             buildConfigField "String", KAKAO_KEY_HASH, '"Jsk14Kq8VfvZc0lo2IwxAmcgZ9k="'
             buildConfigField "String", KAKAO_NATIVE_APP_KEY, '"4f490ba98d78bbadcca3860f890c159f"'
             debuggable true

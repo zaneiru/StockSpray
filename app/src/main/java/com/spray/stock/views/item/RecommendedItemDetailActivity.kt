@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.PopupMenu
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.jakewharton.threetenabp.AndroidThreeTen
+import com.spray.stock.R
 import com.spray.stock.adapters.RecommendedItemCommentAdapter
 import com.spray.stock.databinding.ActivityRecommendedItemDetailBinding
 import com.spray.stock.dialogs.CommentDialog
@@ -21,6 +24,7 @@ import com.spray.stock.dialogs.CommentDialogImpl
 import com.spray.stock.viewModels.Status
 import com.spray.stock.viewModels.items.RecommendedItemCommentViewModel
 import com.spray.stock.viewModels.items.RecommendedItemViewModel
+import com.spray.stock.views.fragments.dialog.CommentBottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -64,7 +68,7 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
         mProgressBarComment = mBinding!!.pbRecommendedItemComments
         mLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mSwipeRefreshLayout.setOnRefreshListener(this)
-        mAdapter = RecommendedItemCommentAdapter(this)
+        mAdapter = RecommendedItemCommentAdapter(this, supportFragmentManager)
         mRecyclerView = mBinding?.rvRecommendedItemDetail!!
         with(mRecyclerView) {
             layoutManager = mLayoutManager
@@ -89,12 +93,8 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
                 super.onScrolled(recyclerView, dx, dy)
             }
         })
-//
-//        mBinding!!.btnRecommendedDetailBack.setOnClickListener {
-//            Toast.makeText(this, "TESTING BUTTON CLICK 1", Toast.LENGTH_SHORT).show()
-//        }
 
-        // 코멘트 작성 클릭시 코멘트 다이얼로그 show
+        // Click event :  코멘트 작성 클릭시 코멘트 다이얼로그 show
         val commentDialogImpl = CommentDialogImpl(this, this)
         mBinding!!.btnWrite.setOnClickListener {
             commentDialogImpl.window?.apply {
@@ -104,9 +104,16 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
             commentDialogImpl.show()
         }
 
+        // Click event : 뒤로가기 버튼
         mBinding!!.tbRecommendedDetail.setNavigationOnClickListener {
             onBackPressed();
         }
+
+//        val btnComment: ImageButton = findViewById(R.id.ib_recommended_detail_comment_popup)
+//        btnComment.setOnClickListener {
+//            val bottomPopupMenu = CommentBottomSheetDialogFragment()
+//            bottomPopupMenu.show(supportFragmentManager, "commentPopup")
+//        }
 
         // 테마 추천 상세 화면 (레이아웃) 클릭시 키보드 비활성화
 //        val layout: LinearLayout = findViewById(R.id.activity_recommended_item_detail)
