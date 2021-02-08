@@ -6,9 +6,12 @@ import com.spray.stock.BuildConfig
 import com.spray.stock.api.NoticeBoardApi
 import com.spray.stock.config.RetrofitClient
 import com.spray.stock.viewModels.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class NoticeBoardViewModel: ViewModel() {
+@HiltViewModel
+class NoticeBoardViewModel @Inject constructor() : ViewModel() {
 
     fun loadData(page: Int) = liveData(Dispatchers.IO) {
         emit(Resource.loading())

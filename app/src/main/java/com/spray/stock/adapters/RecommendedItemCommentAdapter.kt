@@ -2,27 +2,17 @@ package com.spray.stock.adapters
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.PopupMenu
-import android.widget.TextView
-import android.widget.Toast
+import android.view.*
+import android.widget.*
 import androidx.fragment.app.FragmentManager
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.spray.stock.R
 import com.spray.stock.config.GlideApp
 import com.spray.stock.models.item.RecommendedItemComment
 import com.spray.stock.utils.diffTime
-import com.spray.stock.views.fragments.dialog.CommentBottomSheetDialogFragment
+import com.spray.stock.views.fragments.dialog.CommentActionFragment
 
 class RecommendedItemCommentAdapter(val context: Context, private val supportFragmentManager: FragmentManager) : RecyclerView
 .Adapter<RecommendedItemCommentAdapter.ViewHolder>() {
@@ -53,9 +43,21 @@ class RecommendedItemCommentAdapter(val context: Context, private val supportFra
         mPosition = position
         holder.bind(mAsyncDiff.currentList[position])
 
+        // 코멘트 목록의 사이드 메뉴를 누르면 아래에서 bottom dialog 뜨게 했던 부분 -> 이건 중앙 팝업에서 메뉴 선택시 나오게 바꿔야 함.
+//        val commentActionButton: ImageButton = holder.itemView.findViewById(R.id.ib_recommended_detail_comment_popup)
+//        commentActionButton.setOnClickListener {
+//            CommentBottomSheetDialogFragment().apply {
+//                arguments = Bundle().apply {
+//                    putString("id", mRecommendedItemComments[position].comment)
+//                    putString("data", "905")
+//                }
+//                show(supportFragmentManager, "commentPopup")
+//            }
+//        }
+
         val commentActionButton: ImageButton = holder.itemView.findViewById(R.id.ib_recommended_detail_comment_popup)
         commentActionButton.setOnClickListener {
-            CommentBottomSheetDialogFragment().apply {
+            CommentActionFragment().apply {
                 arguments = Bundle().apply {
                     putString("id", mRecommendedItemComments[position].comment)
                     putString("data", "905")

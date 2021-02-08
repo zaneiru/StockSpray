@@ -29,4 +29,7 @@
     <string name="str_member_nickname">회원닉네임</string>
     <string name="str_last_modified_date_diff">작성날짜 DIFF</string>
     <string name="str_tb_recommended_item_title">테마추천</string>
+    <string name="txt_do_update">수정하기</string>
+    <string name="txt_do_delete">삭제하기</string>
+    <string name="txt_do_report_at_menu">신고하기...</string>
 </resources>

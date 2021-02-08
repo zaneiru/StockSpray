@@ -2,21 +2,16 @@ package com.spray.stock.views.item
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageButton
+import android.view.*
 import android.widget.LinearLayout
-import android.widget.PopupMenu
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.spray.stock.R
+import com.orhanobut.logger.Logger
 import com.spray.stock.adapters.RecommendedItemCommentAdapter
 import com.spray.stock.databinding.ActivityRecommendedItemDetailBinding
 import com.spray.stock.dialogs.CommentDialog
@@ -24,7 +19,6 @@ import com.spray.stock.dialogs.CommentDialogImpl
 import com.spray.stock.viewModels.Status
 import com.spray.stock.viewModels.items.RecommendedItemCommentViewModel
 import com.spray.stock.viewModels.items.RecommendedItemViewModel
-import com.spray.stock.views.fragments.dialog.CommentBottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -197,4 +191,8 @@ class RecommendedItemDetailActivity : AppCompatActivity(), SwipeRefreshLayout.On
     }
 
     fun onClick(view: View) {}
+
+    fun onClickReport(view: View) {
+        Logger.d("zzzzzzhahahahahahahahahahah")
+    }
 }
